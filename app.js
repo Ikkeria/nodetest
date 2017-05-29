@@ -11,8 +11,8 @@ let spdy = require('spdy'),
     fs = require('fs');
     
 let options = {
-    key: fs.readFileSync(__dirname + '/server.key'),
-    cert: fs.readFileSync(__dirname + '/server.crt')
+    pfx: fs.readFileSync('./server.pfx'),
+    passphrase: 'testtest1234'
 };
 
 spdy.createServer(options, function(req, res) {

@@ -1,21 +1,45 @@
-/*var http = require('http');
-var port = process.env.port || 1337;
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);*/
+var fs = require('fs');
+var http = require('http');
 
-'use strict';
+var backbone = fs.readFileSync('backbone.js');
+var underscore = fs.readFileSync('underscore.js');
+var applicationjs = fs.readFileSync('application.js');
+var indexhtml = fs.readFileSync('notindex.html');
 
-let spdy = require('spdy'),
-    fs = require('fs');
-    
-let options = {
-    pfx: fs.readFileSync('./server.pfx'),
-    passphrase: 'testtest1234'
-};
+var server = http.createServer(function(request, response) {
+  var headers = {}
+  var body;
+  var status = 200;
 
-spdy.createServer(options, function(req, res) {
-    res.writeHead(200);
-    res.end('Hello world over HTTP/2');
-}).listen(3000);
+  switch(request.url){
+    case "/":
+      headers['Content-Type'] = 'text/html';
+      body = indexhtml
+      break;
+    case "/underscore.js":
+      headers['Content-Type'] = 'application/javascript';
+      body = underscore;
+      break;
+    case "/backbone.js":
+      headers['Content-Type'] = 'application/javascript';
+      body = backbone;
+      break;
+    case "/application.js":
+      headers['Content-Type'] = 'application/javascript';
+      body = applicationjs;
+      break;
+    default:
+      body = "";
+      status = 404;
+  }
+
+  headers['Content-Length'] = body.length;
+
+  response.writeHead(status, headers);
+
+  response.end(body);
+});
+
+server.listen(8080, function(){
+  console.log("HTTP 1.1 Server started on 8080");
+});

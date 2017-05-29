@@ -19,5 +19,3 @@ spdy.createServer(options, function(req, res) {
     res.writeHead(200);
     res.end('Hello world over HTTP/2');
 }).listen(3000);
-
-test

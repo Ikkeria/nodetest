@@ -1,0 +1,22 @@
+{
+  "name": "nodetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ikkeria/nodetest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ikkeria/nodetest/issues"
+  },
+  "homepage": "https://github.com/Ikkeria/nodetest#readme",
+  "dependencies": {
+    "http2": "^3.3.6"
+  }
+}

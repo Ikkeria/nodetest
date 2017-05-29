@@ -1,8 +1,6 @@
-var fs = require('fs');
-var options = {
-};
- 
-require('http2').createServer(options, function(request, response) {
-  response.end('Welcome HTTP/2.0');
-  console.log("Server listening on: http://localhost:8000");
-}).listen(8000);
+var http = require('http');
+var port = process.env.port || 1337;
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World\n');
+}).listen(port);

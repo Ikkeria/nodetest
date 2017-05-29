@@ -11,7 +11,7 @@ let spdy = require('spdy'),
     fs = require('fs');
     
 let options = {
-    pfx: fs.readFileSync('D:\home\site\wwwroot\server.pfx'),
+    pfx: fs.readFileSync('.\server.pfx'),
     passphrase: 'testtest1234'
 };
 

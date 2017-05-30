@@ -18,6 +18,8 @@ function usage() {
 
       -t|--tag)                 Tag name for the image.
 
+      -p|--push)                Push built image.
+
       -h|--help)                Show help.
 EOL
 }
@@ -29,6 +31,7 @@ for ARG in "$@"; do
     "--help")                 set -- "$@" "-h" ;;
     "--repository")           set -- "$@" "-r" ;;
     "--tag")                  set -- "$@" "-t" ;;
+    "--push")                 set -- "$@" "-p" ;;
     *)
       if [[ $ARG == --* ]]; then
         error "Invalid option ${ARG}" >&2
@@ -47,12 +50,14 @@ function error() {
 
 REPOSITORY=""
 TAG="latest"
+PUSH="false"
 
 OPTIND=1
-while getopts ":r:t:h-" OPT; do
+while getopts ":r:t:ph-" OPT; do
   case "$OPT" in
     r) REPOSITORY="${OPTARG}"; ;;
     t) TAG="${OPTARG}"; ;;
+    p) PUSH="true"; ;;
     h)
       usage
       exit 0
@@ -92,3 +97,7 @@ pushd "${SCRIPT_DIRECTORY}" > /dev/null
 trap "popd > /dev/null" EXIT
 
 docker build -t "${REPOSITORY}:${TAG}" .
+
+if [[ $PUSH == "true" ]]; then
+  docker push "${REPOSITORY}:${TAG}"
+fi

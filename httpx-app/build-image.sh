@@ -96,6 +96,11 @@ fi
 pushd "${SCRIPT_DIRECTORY}" > /dev/null
 trap "popd > /dev/null" EXIT
 
+
+IMAGE_ID=$(docker images -q "${REPOSITORY}:${TAG}")
+if [[ $IMAGE_ID != "" ]]; then
+  echo "deleting existing image $(docker rmi -f "$IMAGE_ID")"
+fi
 docker build -t "${REPOSITORY}:${TAG}" .
 
 if [[ $PUSH == "true" ]]; then

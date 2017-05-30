@@ -3,7 +3,7 @@ var fs = require('fs');
 
 var options = {
     pfx: fs.readFileSync('server.pfx'),
-    passphrase: 'testtest123'
+    passphrase: 'testtest1234'
 };
 
 require('http2').createServer(options, function(request, response) {

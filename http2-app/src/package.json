@@ -1,5 +1,5 @@
 {
-  "name": "echo-http-app",
+  "name": "echo-http2-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-
+    "http2": "^3.3.6"
   }
 }

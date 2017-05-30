@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-IMAGE="sebastianhallen/node-request-echo"
+IMAGE="sebastianhallen/node-http2-echo"
 PORT="1337"
 
 function nukeContainer() {
@@ -15,7 +15,7 @@ function nukeContainer() {
 }
 
 function testContainer() {
-  COMMAND="curl -q localhost:${PORT}/some-path/ 2> /dev/null"
+  COMMAND="curl -q -k https://localhost:${PORT}/some-path/ 2> /dev/null"
   hash docker-machine && {
     RESPONSE=$(docker-machine ssh default -C "${COMMAND}")
   }

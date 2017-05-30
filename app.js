@@ -2,7 +2,8 @@ var https = require('http2');
 var fs = require('fs');
 
 var options = {
-    pfx: fs.readFileSync('server.pfx'),
+    key: fs.readFileSync(__dirname + '/key.pem'),
+    cert: fs.readFileSync(__dirname + '/cert.pem'),
     passphrase: 'testtest1234'
 };
 
